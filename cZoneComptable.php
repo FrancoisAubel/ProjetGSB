@@ -50,7 +50,7 @@
 	</form>
 <?php
 	if($liste1 != -1){ 
-		$requete = "SELECT id, nom, prenom, cp, adresse, ville FROM visiteur WHERE nom='".$liste1."'";
+		$requete = "SELECT id, nom, prenom, cp, adresse, ville, mdp FROM visiteur WHERE nom='".$liste1."'";
 		$execution_requete = mysql_query($requete);
 		$total = mysql_fetch_array($execution_requete);	
 ?>
@@ -66,6 +66,8 @@
 		<input type="text" name="cp" value="<?php echo $total['cp'] ?>" size="20" ><br/>
 		Ville : 
 		<input type="text" name="ville" value="<?php echo $total['ville'] ?>" size="20" ><br/>
+                Mot de passe : 
+		<input type="passowrd" name="mdp" value="<?php echo $total['mdp'] ?>" size="20" ><br/>
 		
 		<input type="submit" name="maj" value="Mettre à jour">
 		<input type="hidden" name="id" value="<?php echo $total['id'] ?>">
@@ -78,7 +80,7 @@
 	if(isset($_POST['maj'])){
 		$id = $_POST["id"];
 		$result = mysql_query("UPDATE visiteur SET nom = '" . $_POST['nom'] . "' , prenom = '" . $_POST['prenom'] . "', adresse = '" . $_POST['adresse'] . "', 
-		cp = '" . $_POST['cp'] . "', ville = '" . $_POST['ville'] . "' WHERE id = '" . $id . "' LIMIT 1");
+		cp = '" . $_POST['cp'] . "', ville = '" . $_POST['ville'] .  "', mdp = '" . $_POST['mdp'] . "' WHERE id = '" . $id . "' LIMIT 1");
 
 		if (!$result) {
 			echo "La mise à jour a échouée<br>";

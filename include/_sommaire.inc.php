@@ -17,7 +17,7 @@
 		$requeteNiveau = "SELECT Niveau FROM visiteur WHERE id='" . $idUser . "'";
 		$req = mysql_query($requeteNiveau);
 		$donnees = mysql_fetch_assoc($req);	
-	    $niveauReq = $donnees['Niveau'];
+                $niveauReq = $donnees['Niveau'];
 		$nom = $lgUser['nom'];
 		$prenom = $lgUser['prenom'];            
     ?>
@@ -26,7 +26,13 @@
             echo $nom . " " . $prenom ;
     ?>
         </h2>
-        <h3>Visiteur médical</h3>        
+         <?php if ($niveauReq == 0){
+             $niv = "Visiteur Médicale";
+         }else{ 
+             $niv = "Comptable";
+         } 
+         ?>
+        <h3><?php echo $niv; ?> <!-- Visiteur médical --></h3>        
     <?php
        }
     ?>  
