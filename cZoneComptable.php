@@ -48,7 +48,7 @@
 ?>
 		</select>
 	</form>
-	
+	toto
 <?php
 	if($liste1 != -1){ 
 		$requete = "SELECT id, nom, prenom, cp, adresse, ville FROM visiteur WHERE nom='".$liste1."'";
