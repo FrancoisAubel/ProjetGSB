@@ -26,8 +26,8 @@
 			<option value = -1>-- Choisissez un utilisateur -- </option>
 <?php
 	
-	$connection = mysql_connect('localhost', 'root', 'root');
-	$base = mysql_select_db('gsb_frais');
+
+        connecterServeurBD();
 	
 	$requete = "SELECT nom FROM visiteur";
 	$execution_requete = mysql_query($requete);
