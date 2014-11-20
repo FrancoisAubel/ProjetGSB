@@ -61,7 +61,7 @@
 				  <a href="cFicheDeFraisEmployes.php" title="Consultation de mes fiches de frais">Fiches de Frais des employés</a><br/>
 			   </li>
 			   <li class="smenu">
-				  <a href="cZoneComptable.php" title="Zone Comptable">Modification des informations d'un utilisateu</a>
+				  <a href="cZoneComptable.php" title="Zone Comptable">Modification des informations d'un utilisateur</a>
 			   </li>
 			<?php
 		   }
