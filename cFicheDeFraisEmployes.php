@@ -1,37 +1,37 @@
 <?php
 /** 
- * Script de contrôle et d'affichage du cas d'utilisation "Consulter une fiche de frais"
+ * Script de contrÃ´le et d'affichage du cas d'utilisation "Consulter une fiche de frais"
  * @package default
  * @todo  RAS
  */
   $repInclude = './include/';
   require($repInclude . "_init.inc.php");
 
-  // page inaccessible si visiteur non connecté
+  // page inaccessible si visiteur non connectÃ©
   if ( ! estVisiteurConnecte() ) {
       header("Location: cSeConnecter.php");  
   }
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
   
-  // acquisition des données entrées, ici le numéro de mois et l'étape du traitement
+  // acquisition des donnÃ©es entrÃ©es, ici le numÃ©ro de mois et l'Ã©tape du traitement
   $moisSaisi=lireDonneePost("lstMois", "");
   $etape=lireDonneePost("etape",""); 
 
   if ($etape != "demanderConsult" && $etape != "validerConsult") {
-      // si autre valeur, on considère que c'est le début du traitement
+      // si autre valeur, on considÃ¨re que c'est le dÃ©but du traitement
       $etape = "demanderConsult";        
   } 
-  if ($etape == "validerConsult") { // l'utilisateur valide ses nouvelles données
+  if ($etape == "validerConsult") { // l'utilisateur valide ses nouvelles donnÃ©es
                 
-      // vérification de l'existence de la fiche de frais pour le mois demandé
+      // vÃ©rification de l'existence de la fiche de frais pour le mois demandÃ©
       $existeFicheFrais = existeFicheFrais($idConnexion, $moisSaisi, obtenirIdUserConnecte());
-      // si elle n'existe pas, on la crée avec les élets frais forfaitisés à 0
+      // si elle n'existe pas, on la crÃ©e avec les Ã©lets frais forfaitisÃ©s Ã  0
       if ( !$existeFicheFrais ) {
-          ajouterErreur($tabErreurs, "Le mois demandé est invalide");
+          ajouterErreur($tabErreurs, "Le mois demandÃ© est invalide");
       }
       else {
-          // récupération des données sur la fiche de frais demandée
+          // rÃ©cupÃ©ration des donnÃ©es sur la fiche de frais demandÃ©e
           $tabFicheFrais = obtenirDetailFicheFrais($idConnexion, $moisSaisi, obtenirIdUserConnecte());
       }
   }                                  
@@ -39,13 +39,13 @@
   <!-- Division principale -->
   <div id="contenu">
       <h2>Mes fiches de frais</h2>
-      <h3>Mois à sélectionner : </h3>
+      <h3>Mois Ã  sÃ©lectionner : </h3>
       <form action="" method="post">
       <div class="corpsForm">
           <input type="hidden" name="etape" value="validerConsult" />
       <p>
         <label for="lstMois">Mois : </label>
-        <select id="lstMois" name="lstMois" title="Sélectionnez le mois souhaité pour la fiche de frais">
+        <select id="lstMois" name="lstMois" title="SÃ©lectionnez le mois souhaitÃ© pour la fiche de frais">
             <?php
                 // on propose tous les mois pour lesquels le visiteur a une fiche de frais
                 $req = obtenirReqMoisFicheFrais(obtenirIdUserConnecte());
@@ -68,7 +68,7 @@
       <div class="piedForm">
       <p>
         <input id="ok" type="submit" value="Valider" size="20"
-               title="Demandez à consulter cette fiche de frais" />
+               title="Demandez Ã  consulter cette fiche de frais" />
         <input id="annuler" type="reset" value="Effacer" size="20" />
       </p> 
       </div>
@@ -76,8 +76,8 @@
       </form>
 <?php      
 
-// demande et affichage des différents éléments (forfaitisés et non forfaitisés)
-// de la fiche de frais demandée, uniquement si pas d'erreur détecté au contrôle
+// demande et affichage des diffÃ©rents Ã©lÃ©ments (forfaitisÃ©s et non forfaitisÃ©s)
+// de la fiche de frais demandÃ©e, uniquement si pas d'erreur dÃ©tectÃ© au contrÃ´le
     if ( $etape == "validerConsult" ) {
         if ( nbErreurs($tabErreurs) > 0 ) {
             echo toStringErreurs($tabErreurs) ;
@@ -88,20 +88,20 @@
     <em><?php echo $tabFicheFrais["libelleEtat"]; ?> </em>
     depuis le <em><?php echo $tabFicheFrais["dateModif"]; ?></em></h3>
     <div class="encadre">
-    <p>Montant validé : <?php echo $tabFicheFrais["montantValide"] ;
+    <p>Montant validÃ© : <?php echo $tabFicheFrais["montantValide"] ;
         ?>              
     </p>
 <?php          
-            // demande de la requête pour obtenir la liste des éléments 
-            // forfaitisés du visiteur connecté pour le mois demandé
+            // demande de la requÃªte pour obtenir la liste des Ã©lÃ©ments 
+            // forfaitisÃ©s du visiteur connectÃ© pour le mois demandÃ©
             $req = obtenirReqEltsForfaitFicheFrais($moisSaisi, obtenirIdUserConnecte());
             $idJeuEltsFraisForfait = mysql_query($req, $idConnexion);
             echo mysql_error($idConnexion);
             $lgEltForfait = mysql_fetch_assoc($idJeuEltsFraisForfait);
-            // parcours des frais forfaitisés du visiteur connecté
-            // le stockage intermédiaire dans un tableau est nécessaire
-            // car chacune des lignes du jeu d'enregistrements doit être doit être
-            // affichée au sein d'une colonne du tableau HTML
+            // parcours des frais forfaitisÃ©s du visiteur connectÃ©
+            // le stockage intermÃ©diaire dans un tableau est nÃ©cessaire
+            // car chacune des lignes du jeu d'enregistrements doit Ãªtre doit Ãªtre
+            // affichÃ©e au sein d'une colonne du tableau HTML
             $tabEltsFraisForfait = array();
             while ( is_array($lgEltForfait) ) {
                 $tabEltsFraisForfait[$lgEltForfait["libelle"]] = $lgEltForfait["quantite"];
@@ -110,11 +110,11 @@
             mysql_free_result($idJeuEltsFraisForfait);
             ?>
   	<table class="listeLegere">
-  	   <caption>Quantités des éléments forfaitisés</caption>
+  	   <caption>QuantitÃ©s des Ã©lÃ©ments forfaitisÃ©s</caption>
         <tr>
             <?php
-            // premier parcours du tableau des frais forfaitisés du visiteur connecté
-            // pour afficher la ligne des libellés des frais forfaitisés
+            // premier parcours du tableau des frais forfaitisÃ©s du visiteur connectÃ©
+            // pour afficher la ligne des libellÃ©s des frais forfaitisÃ©s
             foreach ( $tabEltsFraisForfait as $unLibelle => $uneQuantite ) {
             ?>
                 <th><?php echo $unLibelle ; ?></th>
@@ -124,8 +124,8 @@
         </tr>
         <tr>
             <?php
-            // second parcours du tableau des frais forfaitisés du visiteur connecté
-            // pour afficher la ligne des quantités des frais forfaitisés
+            // second parcours du tableau des frais forfaitisÃ©s du visiteur connectÃ©
+            // pour afficher la ligne des quantitÃ©s des frais forfaitisÃ©s
             foreach ( $tabEltsFraisForfait as $unLibelle => $uneQuantite ) {
             ?>
                 <td class="qteForfait"><?php echo $uneQuantite ; ?></td>
@@ -135,26 +135,26 @@
         </tr>
     </table>
   	<table class="listeLegere">
-  	   <caption>Descriptif des éléments hors forfait - <?php echo $tabFicheFrais["nbJustificatifs"]; ?> justificatifs reçus -
+  	   <caption>Descriptif des Ã©lÃ©ments hors forfait - <?php echo $tabFicheFrais["nbJustificatifs"]; ?> justificatifs reÃ§us -
        </caption>
              <tr>
 				<th class="montant">Utilisateur</th>   
                 <th class="date">Date</th>
-                <th class="libelle">Libellé</th>
+                <th class="libelle">LibellÃ©</th>
                 <th class="montant">Montant</th>
 				<th class="montant"></th>                                
              </tr>
 <?php          
-            // demande de la requête pour obtenir la liste des éléments hors
-            // forfait du visiteur connecté pour le mois demandé
+            // demande de la requÃªte pour obtenir la liste des Ã©lÃ©ments hors
+            // forfait du visiteur connectÃ© pour le mois demandÃ©
             $req = obtenirReqEltsHorsForfaitFicheFraisemploye($moisSaisi);
             $idJeuEltsHorsForfait = mysql_query($req, $idConnexion);
             $lgEltHorsForfait = mysql_fetch_assoc($idJeuEltsHorsForfait);
 			
 			
 
-            // ROBIN ta dernière modif est ici. Ajout d'une fonction, d'une deuxième requete dans le while
-            // parcours des éléments hors forfait 
+            // ROBIN ta derniÃ¨re modif est ici. Ajout d'une fonction, d'une deuxiÃ¨me requete dans le while
+            // parcours des Ã©lÃ©ments hors forfait 
             while ( is_array($lgEltHorsForfait) ) {
             ?>
                 <tr>

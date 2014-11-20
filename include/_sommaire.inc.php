@@ -42,26 +42,26 @@
 ?>
         <ul id="menuList">
            <li class="smenu">
-              <a href="cAccueil.php" title="Page d'accueil">Accueil</a>
+              <a href="cAccueil.php" title="Page d'accueil">Accueil</a><br/>
            </li>
            <li class="smenu">
-              <a href="cSeDeconnecter.php" title="Se déconnecter">Se déconnecter</a>
+              <a href="cSeDeconnecter.php" title="Se déconnecter">Se déconnecter</a><br/>
            </li>
            <li class="smenu">
-              <a href="cSaisieFicheFrais.php" title="Saisie fiche de frais du mois courant">Saisie fiche de frais</a>
+              <a href="cSaisieFicheFrais.php" title="Saisie fiche de frais du mois courant">Saisie fiche de frais</a><br/>
            </li>
            <li class="smenu">
-              <a href="cConsultFichesFrais.php" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+              <a href="cConsultFichesFrais.php" title="Consultation de mes fiches de frais">Mes fiches de frais</a><br/>
            </li>
 		   <?php 
 		   $niveauSection = 1;
 		   if ($niveauReq == $niveauSection){
 		   ?>
 			   <li class="smenu">
-				  <a href="cFicheDeFraisEmployes.php" title="Consultation de mes fiches de frais">Fiches de Frais des employés</a>
+				  <a href="cFicheDeFraisEmployes.php" title="Consultation de mes fiches de frais">Fiches de Frais des employés</a><br/>
 			   </li>
 			   <li class="smenu">
-				  <a href="cZoneComptable.php" title="Zone Comptable">Zone Comptable</a>
+				  <a href="cZoneComptable.php" title="Zone Comptable">Modification des informations d'un utilisateur</a>
 			   </li>
 			<?php
 		   }
