@@ -55,7 +55,7 @@
 		$total = mysql_fetch_array($execution_requete);	
 ?>
 	<form method="post" action="">
-		<h2>Informations</h2>
+		<h2>Informations de l'utilisateur</h2>
 		Nom :
 		<input type="text" name="nom" value="<?php echo $total['nom'] ?>" size="20" ><br/>
 		Prénom :
