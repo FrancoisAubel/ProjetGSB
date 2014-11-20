@@ -57,17 +57,17 @@
 	<form method="post" action="">
 		<h2>Informations de l'utilisateur</h2>
 		Nom :
-		<input type="text" name="nom" value="<?php echo $total['nom'] ?>" size="20" ><br/>
+		<input type="text" name="nom" value="<?php echo $total['nom'] ?>" size="20" ><br/><br/>
 		Prénom :
-		<input type="text" name="prenom" value="<?php echo $total['prenom'] ?>" size="20" ><br/>
+		<input type="text" name="prenom" value="<?php echo $total['prenom'] ?>" size="20" ><br/><br/>
 		Adresse :
-		<input type="text" name="adresse" value="<?php echo $total['adresse'] ?>" size="35" ><br/>
+		<input type="text" name="adresse" value="<?php echo $total['adresse'] ?>" size="35" ><br/><br/>
 		Code Postal : 
-		<input type="text" name="cp" value="<?php echo $total['cp'] ?>" size="20" ><br/>
+		<input type="text" name="cp" value="<?php echo $total['cp'] ?>" size="20" ><br/><br/>
 		Ville : 
-		<input type="text" name="ville" value="<?php echo $total['ville'] ?>" size="20" ><br/>
+		<input type="text" name="ville" value="<?php echo $total['ville'] ?>" size="20" ><br/><br/>
                 Mot de passe : 
-		<input type="passowrd" name="mdp" value="<?php echo $total['mdp'] ?>" size="20" ><br/>
+		<input type="passowrd" name="mdp" value="<?php echo $total['mdp'] ?>" size="20" ><br/><br/>
 		
 		<input type="submit" name="maj" value="Mettre à jour">
 		<input type="hidden" name="id" value="<?php echo $total['id'] ?>">
@@ -86,6 +86,7 @@
 			echo "La mise à jour a échouée<br>";
 		} else {
 			echo "Agent mis à jour !<br>";
+                        
 		}
 	}
 ?>
